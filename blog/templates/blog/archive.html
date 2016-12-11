@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+{% block title %}Archive{% endblock %}
+{% block archive %}active{% endblock %}
+
+{% block body %}
+{% if all_post %}
+{% for post in all_post %}
+      <h4>{{ post.date|date:'Y-m-d'}}<a href="{% url 'blog:detail' post.id %}"> {{ post.title }}</a></h4>
+{% endfor %}
+{% else %}
+<h4>You don't have any Post.Go to Add Post link in side navigation bar to add Post.</h4>
+{% endif %}
+{% endblock %}

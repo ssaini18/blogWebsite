@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load staticfiles %}
+  <title>{% block title %}HomePage{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link type="text/css" rel="stylesheet" href="{% static 'blog/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" style="border-radius: 0">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'blog:index' %}">WebSiteName</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'blog:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="{% block home %}{% endblock %}"><a href="{% url 'blog:index' %}">Home</a></li>
+                <li class="{% block add_post %}{% endblock %}"><a href="{% url 'blog:addpost' %}">Add Post</a></li>
+                <li class="{% block archive %}{% endblock %}"><a href="{% url 'blog:archive' %}">Archive</a></li>
+            </ul><br>
+            <form role="search" method="get" action="{% url 'blog:index' %}">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search Blog.." name="q" value="{{ request.GET.q }}">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-9">
+            {% block body %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<footer class="container-fluid">
+  <p style="text-align:center;">Copyright.</p>
+</footer>
+
+</body>
+</html>
+
